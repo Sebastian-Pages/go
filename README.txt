@@ -12,7 +12,7 @@ Vous avez un décompte plus précis de la victoire dans final_go_score()
 Pour vous aider à parcourir le plateau de jeu, si b est un Board(), vous pouvez avoir accès à la couleur de la pierre
 posée en (x,y) en utilisant b[Board.flatten((x,y))]
 
-
+kiki
 GnuGo.py
 --------
 
