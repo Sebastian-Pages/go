@@ -6,7 +6,7 @@ Right now, this class contains the copy of the randomPlayer. But you have to cha
 '''
 
 import time
-import Goban 
+from Goban import *
 from random import choice
 from playerInterface import *
 from minimax import *
@@ -29,9 +29,9 @@ class myPlayer(PlayerInterface):
     def getPlayerMove(self):
         if self._board.is_game_over():
             print("Referee told me to play but the game is over!")
-            return "PASS" 
+            return "PASS"     
         moves = self._board.legal_moves() # Dont use weak_legal_moves() here!
-        move = IAAlphaBeta(self._board, depth=3)
+        move = IAAlphaBeta(self._board, depth=2)
         self._board.push(move)
 
         # New here: allows to consider internal representations of moves
