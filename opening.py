@@ -9,7 +9,7 @@ def Opening(b, count,limiteCPU=None):
 def getBestMove(b) :
     for i in bestMoves:
         if i in b.generate_legal_moves() :
-            bestMoves.pop
+            bestMoves.pop()
             return i
         else :
             return (-1,-1)

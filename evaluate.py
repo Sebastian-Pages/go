@@ -8,8 +8,12 @@ import numpy as np
 def evaluate(b):
     score_black = b._nbBLACK
     score_white = b._nbWHITE
-    scoreTotal = score_white - score_black
-    return scoreTotal
+    capture_white = b._capturedWHITE
+    capture_black = b._capturedBLACK
+    diff = (capture_white-capture_black) + (score_white - score_black)
+    if b.next_player == b._BLACK:
+        return diff
+    return -1 * diff
 
 # Evaluate diff 
 # def evaluate(b):
@@ -18,7 +22,7 @@ def evaluate(b):
 #     for r in range(1, b._BOARDSIZE + 1):
 #         for c in range(1, b._BOARDSIZE + 1):
 #             p = b._BOARDSIZE * r+c
-#             color = b._WHITE
+#             color = b.get()
 #             if color == b._BLACK:
 #                 black_stones += 1
 #             elif color == b._WHITE:
@@ -27,7 +31,6 @@ def evaluate(b):
 #     if b.next_player == b._BLACK:
 #         return diff
 #     return -1 * diff
-
 
 # Evaluate Cluster 
 # def evaluate(b):

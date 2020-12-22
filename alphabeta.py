@@ -4,6 +4,14 @@ from evaluate import *
 
 # Global variable
 nbnodes = 0
+bestMoves= [41,40]
+
+def getBestMove(b) :
+    coup = bestMoves.pop()
+    if coup in b.generate_legal_moves() :
+        return coup
+    else :
+        return -1
 
 ########################
 # IA Alpha Beta : 
@@ -85,15 +93,19 @@ def IAAlphaBeta(b, depth=3, limiteCPU=None):
     return coup 
     
 def IDAlphaBeta(b, depth=3):
-    maxCPU = time.time() + depth
-    thisDepth = 1 
-    res = None 
-    t = 0 
-    while True : 
-        try :
-            t = time.time()
-            res = IAAlphaBeta(b, depth=thisDepth, limiteCPU = maxCPU)
-            t = time.time()
-        except TimeoutError : 
-            return res 
-        thisDepth += 1
+    if len(bestMoves)>0 :
+        coup = getBestMove(b)
+        return coup
+    else : 
+        maxCPU = time.time() + depth
+        thisDepth = 1 
+        res = None 
+        t = 0 
+        while True : 
+            try :
+                t = time.time()
+                res = IAAlphaBeta(b, depth=thisDepth, limiteCPU = maxCPU)
+                t = time.time()
+            except TimeoutError : 
+                return res 
+            thisDepth += 1
