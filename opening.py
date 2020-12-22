@@ -10,4 +10,7 @@ def getBestMove(b) :
     for i in bestMoves:
         if i in b.generate_legal_moves() :
             bestMoves.pop
-        return i
+            return i
+        else :
+            return (-1,-1)
+       
