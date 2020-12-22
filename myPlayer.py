@@ -31,7 +31,7 @@ class myPlayer(PlayerInterface):
             print("Referee told me to play but the game is over!")
             return "PASS"     
         moves = self._board.legal_moves() # Dont use weak_legal_moves() here!
-        move = IAAlphaBeta(self._board, depth=2)
+        move = IDAlphaBeta(self._board, depth=3)
         self._board.push(move)
 
         # New here: allows to consider internal representations of moves
