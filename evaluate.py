@@ -1,51 +1,70 @@
 import Goban
-import evaluateCluster
 import numpy as np
+from random import choice
 ########################
 # Fonction evaluation (heuristique): 
 ########################
 
+#Trivial heuristic -> difference between the number of stones for each one
+# def evaluate(b):
+#     score_black = b._nbBLACK
+#     score_white = b._nbWHITE
+#     capture_white = b._capturedWHITE
+#     capture_black = b._capturedBLACK
+#     diff = (capture_white-capture_black) + (score_white - score_black)
+#     return diff
+
+# def is_eyeish(b, c):
+#     """ test if c is inside a single-color diamond and return the diamond
+#     color or None; this could be an eye, but also a false one """
+#     eyecolor = None
+#     for d in b._get_neighbors(b):
+#         if board[d].isspace():
+#             continue
+#         if board[d] == '.':
+#             return None
+#         if eyecolor is None:
+#             eyecolor = board[d]
+#             othercolor = eyecolor.swapcase()
+#         elif board[d] == othercolor:
+#             return None
+#     return eyecolor
+
+# def is_eye(b, color):
+#     """ test if c is an eye and return its color or None """
+#     eyecolor = is_eyeish(b, b._BLACK)
+#     if eyecolor is None:
+#         return None
+
+#     # Eye-like shape, but it could be a falsified eye
+#     falsecolor = eyecolor.swapcase()
+#     false_count = 0
+#     at_edge = False
+#     for d in diag_neighbors(c):
+#         if b[d].isspace():
+#             at_edge = True
+#         elif b[d] == falsecolor:
+#             false_count += 1
+#     if at_edge:
+#         false_count += 1
+#     if false_count >= 2:
+#         return None
+
+#     return eyecolor
+
+#Evaluate Cluster -> Prioritize a move if it increase a cluster
 def evaluate(b):
-    score_black = b._nbBLACK
-    score_white = b._nbWHITE
-    capture_white = b._capturedWHITE
-    capture_black = b._capturedBLACK
-    diff = (capture_white-capture_black) + (score_white - score_black)
-    if b.next_player == b._BLACK:
-        return diff
-    return -1 * diff
-
-# Evaluate diff 
-# def evaluate(b):
-#     black_stones = 0
-#     white_stones = 0
-#     for r in range(1, b._BOARDSIZE + 1):
-#         for c in range(1, b._BOARDSIZE + 1):
-#             p = b._BOARDSIZE * r+c
-#             color = b.get()
-#             if color == b._BLACK:
-#                 black_stones += 1
-#             elif color == b._WHITE:
-#                 white_stones += 1
-#     diff = black_stones - white_stones
-#     if b.next_player == b._BLACK:
-#         return diff
-#     return -1 * diff
-
-# Evaluate Cluster 
-# def evaluate(b):
-#     b._neighbors = []
-#     b._neighborsEntries = []
-#     for nl in [b._get_neighbors(fcoord) for fcoord in range(b._BOARDSIZE**2)] :
-#         b._neighborsEntries.append(len(b._neighbors))
-#         for n in nl:
-#             b._neighbors.append(n)
-#             print(b._neighbors)
-#         b._neighbors.append(-1) # Sentinelle
-#     b._neighborsEntries = np.array(b._neighborsEntries, dtype='int16')
-#     b._neighbors = np.array(b._neighbors, dtype='int8')
-#     print(b._neighborsEntries)
-#     return b._neighbors
+    b._neighbors = []
+    b._neighborsEntries = []
+    for nl in [b._get_neighbors(fcoord) for fcoord in range(b._BOARDSIZE**2)] :
+        b._neighborsEntries.append(len(b._neighbors))
+        for n in nl:
+            b._neighbors.append(n)
+        b._neighbors.append(-1) # Sentinelle
+    b._neighborsEntries = np.array(b._neighborsEntries, dtype='int16')
+    b._neighbors = np.array(b._neighbors, dtype='int8')
+    #return b._neighbors[0]
+    return choice(b._neighbors)
 
 # def evaluate(b):
 #     print('eval')

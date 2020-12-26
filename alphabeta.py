@@ -1,14 +1,16 @@
 import time
 import Goban 
 from evaluate import *
+from random import choice
 
 # Global variable
 nbnodes = 0
-bestMoves= [41,40]
+# Opening moves from https://senseis.xmp.net/?9x9Openings
+bestMoves= [42,50,51,60,39,40]
 
 def getBestMove(b) :
     coup = bestMoves.pop()
-    if coup in b.generate_legal_moves() :
+    if coup in b.weak_legal_moves() :
         return coup
     else :
         return -1
@@ -31,8 +33,8 @@ def MaxValue(b, alpha, beta, depth=3, limiteCPU=None):
             return 0
     if depth == 0 :
         return evaluate(b)
-    for m in b.generate_legal_moves():
-        b.push(m)
+    for m in b.weak_legal_moves():
+        b.push(choice(b.weak_legal_moves()))
         try : 
             v = MinValue(b, alpha, beta, depth-1)
         except TimeoutError :
@@ -60,8 +62,11 @@ def MinValue(b, alpha, beta, depth=3, limiteCPU=None):
             return 0
     if depth == 0 :
         return evaluate(b)
-    for m in b.generate_legal_moves():
-        b.push(m)
+    for m in b.weak_legal_moves():
+        c = choice(b.weak_legal_moves())
+        while c=="PASS" :
+            c = choice(b.weak_legal_moves())
+        b.push(c)
         try : 
             v = MaxValue(b, alpha, beta, depth-1, limiteCPU)
         except TimeoutError :
@@ -79,7 +84,7 @@ def IAAlphaBeta(b, depth=3, limiteCPU=None):
     alpha = -800 
     beta = 800
     coup = None 
-    for m in b.generate_legal_moves():
+    for m in b.weak_legal_moves():
         b.push(m)
         try :   
             v = MinValue(b, alpha, beta, depth-1, limiteCPU)
