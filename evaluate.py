@@ -5,7 +5,7 @@ from random import choice
 # Fonction evaluation (heuristique): 
 ########################
 
-#Evaluate Cluster -> Prioritize a move if it increase a cluster
+# #Evaluate Cluster -> Prioritize a move if it increase a cluster
 def evaluate(b):
     b._neighbors = []
     b._neighborsEntries = []
@@ -16,7 +16,6 @@ def evaluate(b):
         b._neighbors.append(-1) # Sentinelle
     b._neighborsEntries = np.array(b._neighborsEntries, dtype='int16')
     b._neighbors = np.array(b._neighbors, dtype='int8')
-    #return b._neighbors[0]
     return choice(b._neighbors)
 
 #Trivial heuristic -> difference between the number of stones for each one

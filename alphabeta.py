@@ -118,5 +118,5 @@ def IDAlphaBeta(b, depth=3):
                 res = IAAlphaBeta(b, depth=thisDepth, limiteCPU = maxCPU)
                 t = time.time()
             except TimeoutError : 
-                return res 
+                return res
             thisDepth += 1

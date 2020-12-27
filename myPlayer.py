@@ -9,7 +9,6 @@ import time
 from Goban import *
 from random import choice
 from playerInterface import *
-from minimax import *
 from alphabeta import *
 
 class myPlayer(PlayerInterface):
@@ -24,7 +23,7 @@ class myPlayer(PlayerInterface):
         self._mycolor = None
 
     def getPlayerName(self):
-        return "BestRandomPlayer"
+        return "RandomTeam"
 
     def getPlayerMove(self):
         if self._board.is_game_over():
