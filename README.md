@@ -3,7 +3,7 @@
 **Contexte** : 
 - Projet d'études Universitaire, Master 1 Informatique - Université de Bordeaux.  
  **Kirsan GEOFFROY**
- **Sebastien PAGES**
+ **Sebastian PAGES**
  **Groupe 1** 
 
 ##Description des points forts de votre joueur :
