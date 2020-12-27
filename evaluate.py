@@ -5,6 +5,20 @@ from random import choice
 # Fonction evaluation (heuristique): 
 ########################
 
+#Evaluate Cluster -> Prioritize a move if it increase a cluster
+def evaluate(b):
+    b._neighbors = []
+    b._neighborsEntries = []
+    for nl in [b._get_neighbors(fcoord) for fcoord in range(b._BOARDSIZE**2)] :
+        b._neighborsEntries.append(len(b._neighbors))
+        for n in nl:
+            b._neighbors.append(n)
+        b._neighbors.append(-1) # Sentinelle
+    b._neighborsEntries = np.array(b._neighborsEntries, dtype='int16')
+    b._neighbors = np.array(b._neighbors, dtype='int8')
+    #return b._neighbors[0]
+    return choice(b._neighbors)
+
 #Trivial heuristic -> difference between the number of stones for each one
 # def evaluate(b):
 #     score_black = b._nbBLACK
@@ -51,20 +65,6 @@ from random import choice
 #         return None
 
 #     return eyecolor
-
-#Evaluate Cluster -> Prioritize a move if it increase a cluster
-def evaluate(b):
-    b._neighbors = []
-    b._neighborsEntries = []
-    for nl in [b._get_neighbors(fcoord) for fcoord in range(b._BOARDSIZE**2)] :
-        b._neighborsEntries.append(len(b._neighbors))
-        for n in nl:
-            b._neighbors.append(n)
-        b._neighbors.append(-1) # Sentinelle
-    b._neighborsEntries = np.array(b._neighborsEntries, dtype='int16')
-    b._neighbors = np.array(b._neighbors, dtype='int8')
-    #return b._neighbors[0]
-    return choice(b._neighbors)
 
 # def evaluate(b):
 #     print('eval')
