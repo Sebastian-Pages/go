@@ -15,5 +15,5 @@
 Notre joueur ne s'arrete pas de jouer meme s'il peux finir la partie et gagner. Ce qui amène à remplir le plateau et créer des situations où le plateau et surchargé et notre heuristque évalue mal ce type de plateau. Pour empecher cela nous avons privilégier les plateaux moins chargé lorsque que le nombre de pierre dépasse un certain seuil.
 
 **Statistique W/L** : 
-- Notre joueur a battu le randomPlayer 8/10, il a perdu 2/10.
-- Contre le GnuGoPlayer nous ne gagnons jamais cependant nous pouvons récuperer entre 1 et 3 pierres. 
+- Notre joueur a battu le randomPlayer 12/15, il a perdu 3/15.
+- Contre le GnuGoPlayer nous ne gagnons jamais cependant nous pouvons récuperer en moyenne 20 pierres. 
