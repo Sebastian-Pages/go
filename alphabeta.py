@@ -8,6 +8,9 @@ nbnodes = 0
 # Opening moves from https://senseis.xmp.net/?9x9Openings
 bestMoves= [42,50,51,60,39,40]
 
+########################
+# Function for the first 6 moves: 
+########################
 def getBestMove(b) :
     coup = bestMoves.pop()
     if coup in b.weak_legal_moves() :
@@ -96,7 +99,10 @@ def IAAlphaBeta(b, depth=3, limiteCPU=None):
             coup = m 
         b.pop()
     return coup 
-    
+
+########################
+# Iterative Deepening Alpha Beta : 
+########################
 def IDAlphaBeta(b, depth=3):
     if len(bestMoves)>0 :
         coup = getBestMove(b)
