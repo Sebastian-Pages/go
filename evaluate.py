@@ -17,21 +17,32 @@ def evaluate(b,color):
     libertiesBLACK =0
     sizeWHITE =0
     sizeBLACK =0
+    areaBLACK,areaWHITE,area = b._count_areas()
+
+    #tentative d'arret 
+    # if area < 2 :
+    #     coup = b.pop()
+    #     if coup == "PASS":
+    #         b.push(coup)
+    #         return 99999
 
     for i in range(b._BOARDSIZE**2):
         if b._board[i] == 1:
             libertiesBLACK += b._stringLiberties[i]
             sizeBLACK += b._stringSizes[i]
-            #print("size: ",sizeBLACK)
         if b._board[i] == 2:
             libertiesWHITE += b._stringLiberties[i]
             sizeWHITE += b._stringSizes[i]
-
-    score = ((nbBLACK - nbWHITE)* 5) + ((capturedBLACK - capturedWHITE)*10 )+ ((libertiesBLACK - libertiesWHITE)*1) +((sizeBLACK - sizeWHITE) *5)
+    #((nbBLACK - nbWHITE)* 5) #
+    score =  (((capturedBLACK - capturedWHITE)*10 )+ ((libertiesBLACK - libertiesWHITE)*2) +((sizeBLACK - sizeWHITE) *1) + ((areaBLACK - areaWHITE)*4) - ((nbWHITE + nbBLACK)) )/10
     
     #White
     if color == 2:
         score= 0 - score
+
+    if ((nbWHITE + nbBLACK)> 50):
+        return (0 - (nbWHITE + nbBLACK))/10
+
     return score
 
 
@@ -44,17 +55,17 @@ def evaluate(b,color):
     #         score-= a * stringSizes**2 + c * stringLiberties
 
 # #Evaluate Cluster -> Prioritize a move if it increase a cluster
-def evaluate2(b,color):
-    b._neighbors = []
-    b._neighborsEntries = []
-    for nl in [b._get_neighbors(fcoord) for fcoord in range(b._BOARDSIZE**2)] :
-        b._neighborsEntries.append(len(b._neighbors))
-        for n in nl:
-            b._neighbors.append(n)
-        b._neighbors.append(-1) # Sentinelle
-    b._neighborsEntries = np.array(b._neighborsEntries, dtype='int16')
-    b._neighbors = np.array(b._neighbors, dtype='int8')
-    return choice(b._neighbors)
+# def evaluate2(b,color):
+#     b._neighbors = []
+#     b._neighborsEntries = []
+#     for nl in [b._get_neighbors(fcoord) for fcoord in range(b._BOARDSIZE**2)] :
+#         b._neighborsEntries.append(len(b._neighbors))
+#         for n in nl:
+#             b._neighbors.append(n)
+#         b._neighbors.append(-1) # Sentinelle
+#     b._neighborsEntries = np.array(b._neighborsEntries, dtype='int16')
+#     b._neighbors = np.array(b._neighbors, dtype='int8')
+#     return choice(b._neighbors)
 
 #Trivial heuristic -> difference between the number of stones for each one
 # def evaluate(b):

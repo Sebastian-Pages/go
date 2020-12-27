@@ -7,7 +7,7 @@ from random import choice
 nbnodes = 0
 mycolor=None
 # Opening moves from https://senseis.xmp.net/?9x9Openings
-bestMoves= [42]#,50,51,60,39,40]
+bestMoves= [42,50,51,60,39,40]
 
 ########################
 # Function for the first 6 moves: 

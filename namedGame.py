@@ -63,6 +63,18 @@ while not b.is_game_over():
     totalTime[nextplayer] += time.time() - currentTime
     print("Player ", nextplayercolor, players[nextplayer].getPlayerName(), "plays: " + move) #changed 
 
+    ##
+    # print("TEST: ",b._stringUnionFind)
+    # print("TEST: ",b._stringSizes)
+    
+    # r1,r2,r3 = b._count_areas()
+    # print("a: ",r1," b: ",r2," c: ",r3)
+    # print("TEST: ",b._stringLiberties)
+    # print("TEST: ",b._neighbors )
+    # for i in range(b._BOARDSIZE**2):
+    #     print(b._board[i])
+    #print("trail: ",b._trailMoves)
+    ##
     if not Goban.Board.name_to_flat(move) in legals:
         print(otherplayer, nextplayer, nextplayercolor)
         print("Problem: illegal move")
