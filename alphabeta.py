@@ -5,8 +5,9 @@ from random import choice
 
 # Global variable
 nbnodes = 0
+mycolor=None
 # Opening moves from https://senseis.xmp.net/?9x9Openings
-bestMoves= [42,50,51,60,39,40]
+bestMoves= [42]#,50,51,60,39,40]
 
 ########################
 # Function for the first 6 moves: 
@@ -35,7 +36,7 @@ def MaxValue(b, alpha, beta, depth=3, limiteCPU=None):
         else :
             return 0
     if depth == 0 :
-        return evaluate(b)
+        return evaluate(b,mycolor)
     for m in b.weak_legal_moves():
         b.push(choice(b.weak_legal_moves()))
         try : 
@@ -64,7 +65,7 @@ def MinValue(b, alpha, beta, depth=3, limiteCPU=None):
         else :
             return 0
     if depth == 0 :
-        return evaluate(b)
+        return evaluate(b,mycolor)
     for m in b.weak_legal_moves():
         c = choice(b.weak_legal_moves())
         while c=="PASS" :
@@ -103,7 +104,8 @@ def IAAlphaBeta(b, depth=3, limiteCPU=None):
 ########################
 # Iterative Deepening Alpha Beta : 
 ########################
-def IDAlphaBeta(b, depth=3):
+def IDAlphaBeta(b, color, depth=3):
+    mycolor=color
     if len(bestMoves)>0 :
         coup = getBestMove(b)
         return coup

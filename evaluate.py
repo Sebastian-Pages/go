@@ -5,8 +5,42 @@ from random import choice
 # Fonction evaluation (heuristique): 
 ########################
 
+def evaluate2(b,color):
+
+    # Usefull variables
+    score = 0 
+    capturedWHITE=b._capturedWHITE
+    capturedBLACK=b._capturedBLACK 
+    nbWHITE = b._nbWHITE
+    nbBLACK = b._nbBLACK 
+    libertiesWHITE =0
+    libertiesBLACK =0
+
+    for i in range(b._BOARDSIZE**2):
+        if b._board[i] == 1:
+            libertiesBLACK += b._stringLiberties[i]
+        if b._board[i] == 2:
+            libertiesWHITE += b._stringLiberties[i]
+
+
+    #Black
+    if color == 1 :
+        score = 0
+    #White
+    else:
+        score= 0
+
+   
+    # for stringNumber in b._stringUnionFind:
+    #     stringSizes=b._stringSizes[stringNumber]
+    #     stringLiberties=b._stringLiberties[stringNumber]
+    #     if b[stringNumber] == color:     #b.__getitem__(b,stringNumber) == color:     
+    #         score+= a * stringSizes**2 + c * stringLiberties
+    #     else :   
+    #         score-= a * stringSizes**2 + c * stringLiberties
+
 # #Evaluate Cluster -> Prioritize a move if it increase a cluster
-def evaluate(b):
+def evaluate(b,color):
     b._neighbors = []
     b._neighborsEntries = []
     for nl in [b._get_neighbors(fcoord) for fcoord in range(b._BOARDSIZE**2)] :
